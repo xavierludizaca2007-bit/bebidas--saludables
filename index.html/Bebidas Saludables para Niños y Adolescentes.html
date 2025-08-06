@@ -1,0 +1,1593 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriVida Plus | Comunidad Científica</title>
+  
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #916b5e;        /* Marrón terroso principal */
+      --secondary: #bab78c;      /* Verde suave */
+      --light: #ecdfcd;          /* Beige claro de fondo */
+      --accent: #be8c6b;         /* Marrón claro */
+      --neutral: #c2a88f;        /* Beige cálido */
+      --dark: #686961;           /* Gris verdoso oscuro */
+      --text: #604a33;           /* Marrón oscuro para texto */
+      --highlight: #8e6c49;      /* Marrón dorado */
+      --complement: #879281;     /* Verde grisáceo */
+      --light-text: #a4927a;     /* Beige grisáceo para texto secundario */
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: var(--light);
+      color: var(--text);
+      line-height: 1.7;
+      background-image: url('https://images.unsplash.com/photo-1492496913980-501348b61469?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-attachment: fixed;
+      background-size: 40%;
+      background-position: right bottom;
+      background-repeat: no-repeat;
+      background-blend-mode: overlay;
+      background-color: rgba(236, 223, 205, 0.92);
+      padding: 20px;
+      min-height: 100vh;
+    }
+    
+    .main-header {
+      background: linear-gradient(135deg, var(--primary), var(--highlight));
+      padding: 30px 20px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      border-radius: 15px;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+    
+    .main-header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .main-header p {
+      font-size: 1.3rem;
+      font-style: italic;
+      max-width: 800px;
+      margin: 0 auto;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* Navegación */
+    nav {
+      background: var(--complement);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 18px 26px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+      font-size: 1.05rem;
+      cursor: pointer;
+    }
+    
+    .nav-link.active {
+      background: rgba(255,255,255,0.15);
+    }
+    
+    .nav-link.active:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--secondary);
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--secondary);
+      transform: translateY(5px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      background: rgba(255,255,255,0.12);
+    }
+    
+    .nav-link:hover:after {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    /* Secciones */
+    .section-content {
+      padding: 30px;
+    }
+    
+    .section {
+      display: none;
+    }
+    
+    .section.active {
+      display: block;
+    }
+    
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 3px solid var(--secondary);
+      display: inline-block;
+    }
+    
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 25px;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      border: 1px solid rgba(194, 168, 143, 0.15);
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      border-color: rgba(190, 140, 107, 0.3);
+    }
+    
+    .card-img {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    
+    .card:hover .card-img img {
+      transform: scale(1.08);
+    }
+    
+    .card-content {
+      padding: 20px;
+    }
+    
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      margin: 0 0 15px;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+    
+    .card p {
+      color: var(--dark);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .card-btn {
+      display: inline-block;
+      background: var(--complement);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+    
+    .card-btn:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+    
+    /* Videos */
+    .video-container {
+      margin: 40px 0;
+      text-align: center;
+    }
+    
+    .video-placeholder {
+      background: #000;
+      height: 0;
+      padding-bottom: 56.25%;
+      position: relative;
+      border-radius: 12px;
+      max-width: 800px;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+    
+    .video-placeholder div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      background: rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+    
+    .video-placeholder i {
+      font-size: 3rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .video-placeholder:hover i {
+      transform: scale(1.1);
+    }
+    
+    .video-caption {
+      margin-top: 15px;
+      color: var(--light-text);
+      font-style: italic;
+    }
+    
+    /* Pie de página RESTAURADO */
+    footer {
+      background: var(--complement);
+      color: white;
+      padding: 40px 20px;
+      border-radius: 20px;
+      margin-top: 40px;
+    }
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    
+    .footer-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-section h3:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--secondary);
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: var(--light);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .footer-links a:hover {
+      color: var(--secondary);
+      transform: translateX(5px);
+    }
+    
+    .footer-contact p {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background: var(--secondary);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Sección de bebidas */
+    .drink-card {
+      display: flex;
+      gap: 30px;
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    
+    .drink-image {
+      flex: 0 0 300px;
+      overflow: hidden;
+    }
+    
+    .drink-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    
+    .drink-card:hover .drink-image img {
+      transform: scale(1.1);
+    }
+    
+    .drink-content {
+      padding: 30px;
+      flex: 1;
+    }
+    
+    .drink-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    
+    .drink-subtitle {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: block;
+    }
+    
+    .benefits-list {
+      margin: 20px 0;
+      padding-left: 20px;
+    }
+    
+    .benefits-list li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+    .benefits-list li:before {
+      content: '\f00c';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: var(--secondary);
+    }
+    
+    /* Formulario de comentarios */
+    .comment-form {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      margin-top: 40px;
+    }
+    
+    .comment-form h3 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-weight: 600;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid rgba(194, 168, 143, 0.5);
+      border-radius: 8px;
+      font-family: 'Raleway', sans-serif;
+      transition: all 0.3s ease;
+    }
+    
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(145, 107, 94, 0.2);
+    }
+    
+    .submit-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+      background: var(--highlight);
+      transform: translateY(-3px);
+    }
+    
+    /* Lista de comentarios */
+    .comments-section {
+      margin-top: 50px;
+    }
+    
+    .comments-list {
+      margin-top: 30px;
+    }
+    
+    .comment {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+    }
+    
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    
+    .comment-content {
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    /* Sección de expertos */
+    .expert-card {
+      display: flex;
+      gap: 25px;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    
+    .expert-photo {
+      flex: 0 0 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid var(--light);
+    }
+    
+    .expert-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .expert-info h3 {
+      color: var(--primary);
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 5px;
+    }
+    
+    .expert-specialty {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block;
+    }
+    
+    .expert-bio {
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .drink-card {
+        flex-direction: column;
+      }
+      
+      .drink-image {
+        flex: 0 0 250px;
+      }
+      
+      .expert-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 0;
+      }
+      
+      .main-header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .main-header p {
+        font-size: 1.1rem;
+      }
+      
+      .section-title {
+        font-size: 1.7rem;
+      }
+      
+      .nav-link {
+        padding: 12px 18px;
+        font-size: 0.95rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .main-header h1 {
+        font-size: 2rem;
+      }
+      
+      .main-header p {
+        font-size: 1rem;
+      }
+    }
+    
+    /* Modal para videos */
+    .video-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .video-modal-content {
+      width: 80%;
+      max-width: 900px;
+      position: relative;
+    }
+    
+    .video-modal iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      border-radius: 10px;
+    }
+    
+    .close-video {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 10;
+    }
+    
+    /* Indicador de carga */
+    .video-loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 5px solid var(--secondary);
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Mensaje de error */
+    .video-error {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      background: rgba(145, 107, 94, 0.8);
+      border-radius: 10px;
+      max-width: 80%;
+    }
+    
+    .video-error a {
+      color: var(--secondary);
+      text-decoration: underline;
+      display: block;
+      margin-top: 15px;
+    }
+    
+    .video-error a:hover {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-header">
+    <h1>NutriVida Plus</h1>
+    <p>La excelencia científica en nutrición infantil</p>
+  </div>
+  
+  <div class="container">
+    <nav>
+      <div class="nav-container">
+        <a id="nav-inicio" class="nav-link active">
+          <i class="fas fa-home"></i> Inicio
+        </a>
+        <a id="nav-ciencia" class="nav-link">
+          <i class="fas fa-microscope"></i> Ciencia
+        </a>
+        <a id="nav-recetas" class="nav-link">
+          <i class="fas fa-glass-water"></i> Bebidas
+        </a>
+        <a id="nav-beneficios" class="nav-link">
+          <i class="fas fa-heart-circle-check"></i> Beneficios
+        </a>
+        <a id="nav-expertos" class="nav-link">
+          <i class="fas fa-user-graduate"></i> Expertos
+        </a>
+        <a id="nav-comunidad" class="nav-link">
+          <i class="fas fa-users"></i> Comunidad
+        </a>
+      </div>
+    </nav>
+    
+    <!-- Sección de Inicio -->
+    <section id="inicio" class="section active">
+      <div class="section-content">
+        <h2 class="section-title">Nutrición Infantil Basada en Evidencia</h2>
+        <p>NutriVida Plus es la plataforma científica más completa sobre nutrición infantil, desarrollada con rigor académico y las últimas investigaciones de 2025.</p>
+        
+        <!-- Video principal -->
+        <div class="video-container">
+          <h3 style="color: var(--primary); margin-bottom: 20px;">Descubre la ciencia detrás de las bebidas saludables</h3>
+          <div class="video-placeholder" data-video-id="YIfb4MFQA9E">
+            <div>
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
+          <p class="video-caption">Cómo las bebidas científicamente formuladas mejoran el desarrollo infantil</p>
+        </div>
+        
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Investigación científica">
+            </div>
+            <div class="card-content">
+              <h3>Investigación Actualizada</h3>
+              <p>Accede a los últimos estudios científicos sobre nutrición infantil, revisados por expertos y actualizados constantemente.</p>
+              <a href="#" class="card-btn">Explorar estudios</a>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-img">
+              <img src="https://tse1.mm.bing.net/th/id/OIP.tqYQa8YWn3RHbupn6mg3bgHaFM?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Bebidas saludables">
+            </div>
+            <div class="card-content">
+              <h3>Bebidas Saludables</h3>
+              <p>Descubre bebidas científicamente formuladas para optimizar el desarrollo físico y cognitivo de niños y adolescentes.</p>
+              <a id="btn-bebidas" class="card-btn">Ver bebidas</a>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1522071901873-411886a10004?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Comunidad interactiva">
+            </div>
+            <div class="card-content">
+              <h3>Comunidad Global</h3>
+              <p>Conecta con padres, educadores y profesionales de la salud para compartir experiencias y conocimientos validados.</p>
+              <a href="#" class="card-btn">Unirse</a>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Guías prácticas">
+            </div>
+            <div class="card-content">
+              <h3>Guías Prácticas</h3>
+              <p>Descarga nuestras guías científicas sobre preparación de bebidas saludables para cada etapa del desarrollo infantil.</p>
+              <a href="#" class="card-btn">Descargar guías</a>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Talleres virtuales">
+            </div>
+            <div class="card-content">
+              <h3>Talleres Virtuales</h3>
+              <p>Aprende a preparar bebidas saludables en nuestros talleres en vivo con expertos en nutrición infantil.</p>
+              <a href="#" class="card-btn">Ver calendario</a>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-img">
+              <img src="https://tse1.mm.bing.net/th/id/OIP.k5kgVmXMmxz3z0KVUAO6ggHaFS?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Investigación bebidas">
+            </div>
+            <div class="card-content">
+              <h3>Ciencia de Bebidas</h3>
+              <p>Estudios específicos sobre cómo los componentes de bebidas naturales afectan el desarrollo infantil.</p>
+              <a href="#" class="card-btn">Ver investigaciones</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Videos de bebidas que transforman vidas -->
+        <div style="margin: 60px 0; text-align: center;">
+          <h3 class="section-title">Bebidas que Transforman Vidas</h3>
+          <p style="margin-bottom: 30px;">Descubre cómo pequeñas modificaciones en las bebidas pueden tener grandes impactos en la salud infantil</p>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div>
+              <h4 style="color: var(--primary); margin-bottom: 15px;">Batidos Científicos</h4>
+              <div class="video-placeholder" data-video-id="Z7s2mdXMppg">
+                <div>
+                  <i class="fas fa-play-circle"></i>
+                </div>
+              </div>
+              <p class="video-caption">Cómo preparar batidos nutricionalmente completos</p>
+            </div>
+            
+            <div>
+              <h4 style="color: var(--primary); margin-bottom: 15px;">Hidratación Saludable</h4>
+              <div class="video-placeholder" data-video-id="nI-ZRTv-rVs">
+                <div>
+                  <i class="fas fa-play-circle"></i>
+                </div>
+              </div>
+              <p class="video-caption">Alternativas al agua para mantener a los niños hidratados</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Sección de Ciencia - VIDEO ELIMINADO -->
+    <section id="ciencia" class="section">
+      <div class="section-content">
+        <h2 class="section-title">Evidencia Científica 2025</h2>
+        <p>Nuestra plataforma integra las investigaciones más recientes de instituciones líderes en nutrición infantil a nivel mundial:</p>
+        
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-content">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                <div style="background: var(--complement); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                  <i class="fas fa-university" style="font-size: 1.8rem; color: white;"></i>
+                </div>
+                <h3>Universidad de Harvard</h3>
+              </div>
+              <p>El estudio longitudinal más completo sobre el impacto de los nutrientes en el desarrollo cognitivo infantil, con seguimiento de 8 años.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-content">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                <div style="background: var(--primary); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                  <i class="fas fa-globe-americas" style="font-size: 1.8rem; color: white;"></i>
+                </div>
+                <h3>OMS 2025</h3>
+              </div>
+              <p>Nuevas directrices globales sobre requerimientos nutricionales para diferentes grupos de edad y contextos culturales.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-content">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                <div style="background: var(--highlight); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                  <i class="fas fa-hospital" style="font-size: 1.8rem; color: white;"></i>
+                </div>
+                <h3>Instituto de Salud Infantil</h3>
+              </div>
+              <p>Investigación sobre la relación entre nutrición temprana y desarrollo del sistema inmunológico en niños.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Investigación nutricional">
+            </div>
+            <div class="card-content">
+              <h3>Estudio NutriKids 2025</h3>
+              <p>Resultados del mayor estudio sobre hábitos nutricionales en niños de 3 a 12 años en Latinoamérica.</p>
+              <a href="#" class="card-btn">Ver resultados</a>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1579684453423-f84349ef60b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Investigación bebidas">
+            </div>
+            <div class="card-content">
+              <h3>Impacto de Bebidas</h3>
+              <p>Análisis de cómo diferentes tipos de bebidas afectan el rendimiento escolar en niños.</p>
+              <a href="#" class="card-btn">Ver estudio</a>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1575505586569-646b2ca898fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Investigación suplementos">
+            </div>
+            <div class="card-content">
+              <h3>Suplementos Naturales</h3>
+              <p>Eficacia de suplementos derivados de frutas en el desarrollo infantil temprano.</p>
+              <a href="#" class="card-btn">Leer investigación</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Video de ciencia ELIMINADO -->
+      </div>
+    </section>
+    
+    <!-- Sección de Bebidas Saludables -->
+    <section id="recetas" class="section">
+      <div class="section-content">
+        <h2 class="section-title">Bebidas Saludables</h2>
+        <p>Descubre bebidas científicamente formuladas para niños y adolescentes, diseñadas con los últimos avances en nutrición infantil:</p>
+        
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Batido de frutas">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Batido Energético Multifruta</h3>
+            <span class="drink-subtitle">Para niños de 4-12 años | Rinde 2 porciones</span>
+            <p>Mezcla de frutas tropicales con alto contenido vitamínico, diseñada para proporcionar energía sostenida durante el día escolar.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Mejora la concentración y rendimiento escolar</li>
+              <li>Fortalece el sistema inmunológico</li>
+              <li>Proporciona el 60% de la dosis diaria de vitamina C</li>
+              <li>Sin azúcares añadidos</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.6_ucgm8310XFMLci5rRSGQHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Leche dorada">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Leche Dorada con Cúrcuma</h3>
+            <span class="drink-subtitle">Para adolescentes | Rinde 1 porción</span>
+            <p>Bebida antiinflamatoria y relajante ideal para antes de dormir, con propiedades digestivas y reguladoras del sueño.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Mejora la calidad del sueño</li>
+              <li>Reduce la inflamación muscular en deportistas jóvenes</li>
+              <li>Fortalece el sistema digestivo</li>
+              <li>Proporciona antioxidantes naturales</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.35Xw-uqeiv2r7soQsgLh4wHaF7?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Agua infusionada">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Agua Infusionada con Frutas</h3>
+            <span class="drink-subtitle">Para todas las edades | Rinde 1 litro</span>
+            <p>Alternativa saludable a los refrescos, con sabor natural y beneficios nutricionales sin calorías adicionales.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Promueve la hidratación saludable</li>
+              <li>Introduce sabores naturales sin azúcares</li>
+              <li>Proporciona vitaminas solubles en agua</li>
+              <li>Fácil de preparar y versátil</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.kqc1LRVMHMKtuFTvyhjXKAHaGG?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Smoothie verde">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Smoothie Verde Energizante</h3>
+            <span class="drink-subtitle">Para niños de 6+ años | Rinde 2 porciones</span>
+            <p>Combinación de espinaca, piña y plátano que proporciona energía natural y nutrientes esenciales.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Alto contenido de hierro y vitamina K</li>
+              <li>Mejora los niveles de energía matutinos</li>
+              <li>Promueve la salud digestiva</li>
+              <li>Fuente natural de fibra</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.LYI3rkFqI_HIyJRiwyi83AHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Chocolate caliente saludable">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Chocolate Caliente Nutritivo</h3>
+            <span class="drink-subtitle">Para todas las edades | Rinde 1 porción</span>
+            <p>Versión saludable del clásico chocolate caliente, endulzado naturalmente y enriquecido con nutrientes.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Contiene antioxidantes del cacao puro</li>
+              <li>Fuente de calcio y magnesio</li>
+              <li>Sin azúcares refinados</li>
+              <li>Promueve la relajación</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://1.bp.blogspot.com/-vwwVKjMWKqU/Xzw1QqRcqMI/AAAAAAAAAdE/fZAVNyZh7AkFcWnvjMkxXvF6HF46JORiQCLcBGAsYHQ/s1600/zumo-naranja-desintoxicante.jpg" alt="Jugo de 
+zanahoria">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Jugo de Zanahoria y Naranja</h3>
+            <span class="drink-subtitle">Para niños de 3+ años | Rinde 1 porción</span>
+            <p>Combinación rica en vitamina A y C que fortalece la visión y el sistema inmunológico.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Alto contenido de betacarotenos</li>
+              <li>Refuerza las defensas naturales</li>
+              <li>Promueve la salud ocular</li>
+              <li>Dulce natural sin añadidos</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.S8eVXcypfLhl-8sDjCAdRwHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Leche de almendras">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Leche de Almendras Casera</h3>
+            <span class="drink-subtitle">Para todas las edades | Rinde 1 litro</span>
+            <p>Alternativa láctea rica en nutrientes, perfecta para niños con intolerancias o alergias.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Fuente de vitamina E y calcio</li>
+              <li>Baja en calorías</li>
+              <li>Sin lactosa ni gluten</li>
+              <li>Promueve la salud cardiovascular</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.eRpCy2Kvoe_slh-eqx2xggHaEU?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Té de manzanilla">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Té de Manzanilla con Miel</h3>
+            <span class="drink-subtitle">Para niños de 5+ años | Rinde 1 taza</span>
+            <p>Infusión relajante ideal para antes de dormir o en momentos de estrés.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Promueve la relajación natural</li>
+              <li>Alivia molestias digestivas</li>
+              <li>Antioxidantes naturales</li>
+              <li>Sin cafeína</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://granvita.com/wp-content/uploads/2020/06/receta_batido_de_frutos_rojos_con_avena_Granvita.jpg" alt="Batido de avena">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Batido de Avena y Frutos Rojos</h3>
+            <span class="drink-subtitle">Para desayunos | Rinde 2 porciones</span>
+            <p>Opción completa para empezar el día con energía sostenida y nutrientes esenciales.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Fuente de fibra soluble</li>
+              <li>Proporciona energía de liberación lenta</li>
+              <li>Alto contenido de antioxidantes</li>
+              <li>Promueve la saciedad</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.eH00nLyYEtOcHl38BO6BrwHaEO?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Agua de coco">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Agua de Coco Natural</h3>
+            <span class="drink-subtitle">Para deportistas jóvenes | Rinde 1 porción</span>
+            <p>Bebida isotónica natural perfecta para reponer electrolitos después del ejercicio.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Repone electrolitos naturalmente</li>
+              <li>Hidratación rápida</li>
+              <li>Bajo en calorías</li>
+              <li>Contiene potasio y magnesio</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.iCdihi4r9HfLzGrsZv0ouAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Licuado de proteína">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Licuado Proteico de Plátano</h3>
+            <span class="drink-subtitle">Para adolescentes activos | Rinde 1 porción</span>
+            <p>Combinación perfecta de proteínas y carbohidratos para la recuperación muscular.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Ayuda en la recuperación muscular</li>
+              <li>Fuente de proteína completa</li>
+              <li>Proporciona energía rápida</li>
+              <li>Promueve el crecimiento muscular</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://diarioroatan.com/wp-content/uploads/2017/09/CarnFree_SanJuan1-4.jpg" alt="Jugo detox">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Jugo Detox de Pepino y Limón</h3>
+            <span class="drink-subtitle">Para limpieza suave | Rinde 1 porción</span>
+            <p>Bebida refrescante que ayuda a la hidratación y limpieza natural del organismo.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Promueve la hidratación celular</li>
+              <li>Ayuda a la digestión</li>
+              <li>Fuente de vitamina C</li>
+              <li>Propiedades alcalinizantes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <div class="drink-image">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.w2c42mwXNDKG4Ncrl1exbAHaFH?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Batido de mango">
+          </div>
+          <div class="drink-content">
+            <h3 class="drink-title">Batido Tropical de Mango</h3>
+            <span class="drink-subtitle">Para meriendas | Rinde 2 porciones</span>
+            <p>Deliciosa opción cargada de vitaminas y minerales esenciales.</p>
+            
+            <h4>Beneficios principales:</h4>
+            <ul class="benefits-list">
+              <li>Alto contenido de vitamina A</li>
+              <li>Refuerza el sistema inmunológico</li>
+              <li>Dulce natural sin añadidos</li>
+              <li>Fuente de fibra dietética</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Sección de Beneficios -->
+    <section id="beneficios" class="section">
+      <div class="section-content">
+        <h2 class="section-title">Beneficios Clave</h2>
+        <p>Descubre cómo NutriVida Plus puede transformar la nutrición de tus hijos:</p>
+        
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Desarrollo cognitivo">
+            </div>
+            <div class="card-content">
+              <h3>Mejora el Desarrollo Cognitivo</h3>
+              <p>Nuestras fórmulas están diseñadas para potenciar las funciones cerebrales y mejorar el rendimiento escolar.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sistema inmunológico">
+            </div>
+            <div class="card-content">
+              <h3>Fortalece el Sistema Inmunológico</h3>
+              <p>Ingredientes científicamente seleccionados para reforzar las defensas naturales de los niños.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Hábitos saludables">
+            </div>
+            <div class="card-content">
+              <h3>Crea Hábitos Saludables</h3>
+              <p>Ayuda a establecer patrones de alimentación que durarán toda la vida desde la infancia.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Energía natural">
+            </div>
+            <div class="card-content">
+              <h3>Energía Natural Sin Azúcares Añadidos</h3>
+              <p>Proporciona energía sostenida sin los picos de azúcar de las bebidas comerciales.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Comunidad científica">
+            </div>
+            <div class="card-content">
+              <h3>Respaldado por la Comunidad Científica</h3>
+              <p>Todas nuestras recomendaciones están basadas en las últimas investigaciones pediátricas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Sección de Expertos -->
+    <section id="expertos" class="section">
+      <div class="section-content">
+        <h2 class="section-title">Nuestros Expertos</h2>
+        <p>Conoce al equipo científico detrás de NutriVida Plus:</p>
+        
+        <div class="expert-card">
+          <div class="expert-photo">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Dra. Laura Méndez">
+          </div>
+          <div class="expert-info">
+            <h3>Dra. Laura Méndez</h3>
+            <span class="expert-specialty">Pediatra Nutricional</span>
+            <p class="expert-bio">Especialista en nutrición infantil con más de 15 años de experiencia. Directora del Programa Nacional de Nutrición Infantil.</p>
+          </div>
+        </div>
+        
+        <div class="expert-card">
+          <div class="expert-photo">
+            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Dr. Carlos Ruiz">
+          </div>
+          <div class="expert-info">
+            <h3>Dr. Carlos Ruiz</h3>
+            <span class="expert-specialty">Bioquímico Nutricional</span>
+            <p class="expert-bio">Investigador principal en el desarrollo de fórmulas nutricionales para bebidas saludables infantiles.</p>
+          </div>
+        </div>
+        
+        <div class="expert-card">
+          <div class="expert-photo">
+            <img src="https://images.unsplash.com/photo-1579684453423-f84349ef60b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Dra. Ana Beltrán">
+          </div>
+          <div class="expert-info">
+            <h3>Dra. Ana Beltrán</h3>
+            <span class="expert-specialty">Nutricionista Deportiva Infantil</span>
+            <p class="expert-bio">Especialista en nutrición para niños y adolescentes deportistas. Autora de múltiples estudios sobre hidratación saludable.</p>
+          </div>
+        </div>
+        
+        <div class="expert-card">
+          <div class="expert-photo">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Dr. Javier López">
+          </div>
+          <div class="expert-info">
+            <h3>Dr. Javier López</h3>
+            <span class="expert-specialty">Especialista en Desarrollo Cognitivo</span>
+            <p class="expert-bio">Investigador de cómo la nutrición afecta el desarrollo cerebral en niños de 0-12 años.</p>
+          </div>
+        </div>
+        
+        <div class="expert-card">
+          <div class="expert-photo">
+            <img src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Dra. Sofía Herrera">
+          </div>
+          <div class="expert-info">
+            <h3>Dra. Sofía Herrera</h3>
+            <span class="expert-specialty">Gastroenteróloga Pediátrica</span>
+            <p class="expert-bio">Especialista en sistemas digestivos infantiles y tolerancia a diferentes componentes nutricionales.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Sección de Comunidad -->
+    <section id="comunidad" class="section">
+      <div class="section-content">
+        <h2 class="section-title">Comunidad NutriVida</h2>
+        <p>Conecta con otros padres, comparte experiencias y aprende de nuestra comunidad científica.</p>
+        
+        <div class="comment-form">
+          <h3>Comparte tu experiencia</h3>
+          <form id="commentForm">
+            <div class="form-group">
+              <label for="commentName">Nombre:</label>
+              <input type="text" id="commentName" required>
+            </div>
+            <div class="form-group">
+              <label for="commentText">Comentario:</label>
+              <textarea id="commentText" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Publicar Comentario</button>
+          </form>
+        </div>
+        
+        <div class="comments-section">
+          <h3>Comentarios Recientes</h3>
+          <div class="comments-list" id="commentsList">
+            <div class="comment">
+              <div class="comment-header">
+                <span>Dra. Laura Méndez</span>
+                <span>Hoy</span>
+              </div>
+              <div class="comment-content">
+                Como pediatra, recomiendo ampliamente las bebidas saludables presentadas aquí. Son excelentes alternativas a los jugos procesados.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <!-- Pie de página RESTAURADO -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>NutriVida Plus</h3>
+        <p>La excelencia científica en nutrición infantil. Investigación, educación y comunidad para padres conscientes.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Enlaces Rápidos</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Investigaciones</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Bebidas Saludables</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Talleres Virtuales</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Av. Nutrición 123, Quito, Ecuador</p>
+        <p><i class="fas fa-phone"></i> +593 2 123 4567</p>
+        <p><i class="fas fa-envelope"></i> info@nutrividaplus.com</p>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>&copy; 2025 NutriVida Plus. Todos los derechos reservados.</p>
+      <p>Desarrollado por Unidad Educativa Fiscal Provincia de Bolívar / Comisión de Bar</p>
+    </div>
+  </footer>
+
+  <!-- Modal para videos -->
+  <div class="video-modal" id="videoModal">
+    <div class="video-modal-content">
+      <button class="close-video" id="closeVideo">&times;</button>
+      <iframe id="videoFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-loading" id="videoLoading">
+        <div class="spinner"></div>
+        <p>Cargando video...</p>
+      </div>
+      <div class="video-error" id="videoError" style="display: none;">
+        <p>No se pudo cargar el video. Por favor, verifica:</p>
+        <ul>
+          <li>Tu conexión a internet</li>
+          <li>Que YouTube no esté bloqueado</li>
+          <li>Que el video esté disponible</li>
+        </ul>
+        <a id="youtubeLink" target="_blank">Ver en YouTube</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Manejar el envío de comentarios
+      const commentForm = document.getElementById('commentForm');
+      const commentsList = document.getElementById('commentsList');
+      
+      if (commentForm) {
+        commentForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const name = document.getElementById('commentName').value;
+          const text = document.getElementById('commentText').value;
+          
+          if (name && text) {
+            addComment(name, text);
+            commentForm.reset();
+          }
+        });
+      }
+      
+      // Función para añadir un nuevo comentario
+      function addComment(name, text) {
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('es-ES', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        });
+        
+        const commentDiv = document.createElement('div');
+        commentDiv.className = 'comment';
+        commentDiv.innerHTML = `
+          <div class="comment-header">
+            <span>${name}</span>
+            <span>${dateStr}</span>
+          </div>
+          <div class="comment-content">${text}</div>
+        `;
+        
+        if (commentsList) {
+          commentsList.prepend(commentDiv);
+        }
+      }
+      
+      // Navegación entre secciones - CORRECCIÓN APLICADA
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('.section');
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.id.replace('nav-', '');
+          
+          // Actualizar navegación activa
+          navLinks.forEach(nav => nav.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Mostrar sección correspondiente
+          sections.forEach(section => {
+            section.classList.remove('active');
+            if (section.id === targetId) {
+              section.classList.add('active');
+            }
+          });
+        });
+      });
+      
+      // Botón para ir a bebidas desde la tarjeta
+      const btnBebidas = document.getElementById('btn-bebidas');
+      if (btnBebidas) {
+        btnBebidas.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('nav-recetas').click();
+        });
+      }
+      
+      // Funcionalidad para videos
+      const videoPlaceholders = document.querySelectorAll('.video-placeholder');
+      const videoModal = document.getElementById('videoModal');
+      const videoFrame = document.getElementById('videoFrame');
+      const closeVideo = document.getElementById('closeVideo');
+      const videoLoading = document.getElementById('videoLoading');
+      const videoError = document.getElementById('videoError');
+      const youtubeLink = document.getElementById('youtubeLink');
+      
+      // Función para abrir video
+      function openVideo(videoId) {
+        // Mostrar indicador de carga
+        videoLoading.style.display = 'flex';
+        videoError.style.display = 'none';
+        videoModal.style.display = 'flex';
+        
+        // Construir URL de YouTube con HTTPS
+        const videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        
+        // Actualizar enlace directo
+        youtubeLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+        youtubeLink.textContent = `Ver video en YouTube (ID: ${videoId})`;
+        
+        // Intentar cargar el video
+        videoFrame.src = videoUrl;
+        
+        // Manejar errores de carga
+        videoFrame.onload = function() {
+          videoLoading.style.display = 'none';
+        };
+        
+        videoFrame.onerror = function() {
+          videoLoading.style.display = 'none';
+          videoError.style.display = 'block';
+        };
+      }
+      
+      // Función para cerrar video
+      function closeVideoModal() {
+        videoFrame.src = '';
+        videoModal.style.display = 'none';
+      }
+      
+      // Evento para cada placeholder de video
+      videoPlaceholders.forEach(video => {
+        video.addEventListener('click', function() {
+          const videoId = this.getAttribute('data-video-id');
+          openVideo(videoId);
+        });
+      });
+      
+      // Cerrar modal al hacer clic en la X
+      closeVideo.addEventListener('click', closeVideoModal);
+      
+      // Cerrar modal al hacer clic fuera del video
+      videoModal.addEventListener('click', function(e) {
+        if (e.target === videoModal) {
+          closeVideoModal();
+        }
+      });
+      
+      // Cerrar con tecla ESC
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && videoModal.style.display === 'flex') {
+          closeVideoModal();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
